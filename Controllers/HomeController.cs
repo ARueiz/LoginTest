@@ -4,11 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using LoginTest.ViewModel;
+using LoginTest.Models;
+using System.Text;
 
 namespace LoginTest.Controllers
 {
     public class HomeController : Controller
     {
+        private ExhibitionEntities db = new ExhibitionEntities();
         public ActionResult Index()
         {
             return View();
@@ -38,12 +41,38 @@ namespace LoginTest.Controllers
         }
 
         [HttpPost]
-        public ActionResult userLogin(CLoginViewModel vmodel)
+        public ActionResult userLogin(CLoginViewModel logindata)
         {
-            Session.Clear();
-            Session["UserRole"] = "User";
+            //return Content($"帳號:{logindata.email}\n密碼:{logindata.password}", "text/plain", Encoding.UTF8);
 
-            return RedirectToAction("index", "users");
+            bool exists = db.users.Any(users => users.email == logindata.email && users.password == logindata.password);
+            if (exists) {
+                return Content($"帳號:{logindata.email}\n密碼:{logindata.password} 登入成功", "text/plain", Encoding.UTF8);
+            }
+            else
+            {
+                return Content($"帳號:{logindata.email}\n密碼:{logindata.password} 登入失敗", "text/plain", Encoding.UTF8);
+            }
+
+            //if (string.IsNullOrEmpty(logindata.email) || string.IsNullOrEmpty(logindata.password))
+            //{
+            //    return RedirectToAction("index", "Home");
+            //}
+            //else
+            //{
+            //    var userData = db.users.Where(user => user.email == logindata.email && user.password == logindata.password);
+
+            //    if (userData != null)
+            //    {
+            //        Session["UserRole"] = "User";
+            //        Session["UserName"] = userData[0].name;
+            //        return RedirectToAction("index", "users");
+            //    }
+            //    else
+            //    {
+            //        return RedirectToAction("index", "Home");
+            //    }
+            //}
         }
 
         public ActionResult ExhibitorLogin()

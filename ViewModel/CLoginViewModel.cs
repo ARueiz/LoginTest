@@ -7,7 +7,7 @@ namespace LoginTest.ViewModel
 {
     public class CLoginViewModel
     {
-        public string txtEmail { get; set; }
-        public string txtPassword { get; set; }
+        public string email { get; set; }
+        public string password { get; set; }
     }
 }
