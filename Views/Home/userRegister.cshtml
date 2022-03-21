@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewBag.Title = "userRegister";
+}
+
+<section class="h-100" id="VuePage">
+    <div class="container h-100">
+        <div class="row justify-content-sm-center h-100">
+            <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+                <div class="card shadow-lg mt-3">
+                    <div class="card-body p-3">
+                        <h1 class="fs-4 card-title fw-bold">用戶註冊</h1>
+                        <form method="POST" autocomplete="off">
+                            <input type="hidden" name="password" id="password" v-model="">
+
+                            <div class="mb-2">
+                                <label class="mb-2 text-muted" for="name">姓名</label>
+                                <input type="text" class="form-control" name="name" v-model="form.name" required autofocus>
+                                <div class="invalid-feedback">
+                                    Name is invalid
+                                </div>
+                            </div>
+
+                            <div class="mb-2">
+                                <label class="mb-2 text-muted" for="phone">電話</label>
+                                <input type="text" class="form-control" name="phone" v-model="form.phone" required autofocus>
+                                <div class="invalid-feedback">
+                                    Name is invalid
+                                </div>
+                            </div>
+
+                            <div class="mb-2">
+                                <label class="mb-2 text-muted" for="email">E-Mail Address</label>
+                                <input type="email" class="form-control" name="email" v-model="form.email" required autofocus>
+                                <div class="invalid-feedback">
+                                    Email is invalid
+                                </div>
+                            </div>
+
+                            <div class="mb-2">
+                                <div class="mb-2 w-100">
+                                    <label class="text-muted" for="userpassword">Password</label>
+                                </div>
+                                <input type="password" class="form-control" v-model="form.userpassword" required>
+                                <div class="invalid-feedback">
+                                    Password is required
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center">
+                                <button type="submit" class="btn btn-primary ms-auto">
+                                    註冊
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer py-3 border-0">
+                        <div class="text-center">
+                            Don't have an account? <a href="register.html" class="text-dark">Create One</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="ErrorAlert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">錯誤訊息</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</section>
+
+@section scripts{
+    <script>
+        var VuePage = new Vue({
+            el: '#VuePage'
+            , data: function () {
+                var data = {
+                    form: {}
+                };
+                return data;
+            }
+            , methods: {
+                // 執行註冊按鈕
+                DoRegister: function () {
+                    var self = this;
+
+                    // 組合表單資料
+                    var postData = {};
+                    postData['UserID'] = self.form.UserID;
+                    postData['UserPwd'] = self.form.UserPwd;
+                    postData['UserName'] = self.form.UserName;
+                    postData['UserEmail'] = self.form.UserEmail;
+
+                    // 使用 jQuery Ajax 傳送至後端
+                    $.ajax({
+                        url:'@Url.Content("~/Member/DoRegister")',
+                        method:'POST',
+                        dataType:'json',
+                        data: { inModel: postData },
+                        success: function (datas) {
+                            if (datas.ErrMsg) {
+                                alert(datas.ErrMsg);
+                                return;
+                            }
+                            alert(datas.ResultMsg);
+                        },
+                        error: function (err) {
+                            $('#ErrorMsg').html(err.responseText);
+                            $('#ErrorAlert').modal('toggle');
+                        },
+                    });
+                }
+            }
+        })
+    </script>
+}

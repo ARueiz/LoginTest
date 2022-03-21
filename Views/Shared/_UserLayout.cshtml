@@ -26,39 +26,28 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                        <li>@Html.ActionLink("查看展場資訊", "Index", "Home", new { }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("個人資訊", "Index", "Users", new { }, new { @class = "nav-link" })</li>
 
                         <li class="nav-item">
-                        <li>@Html.ActionLink("用戶", "Index", "users", new { }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("查看票券", "Index", "Exhibitors", new { }, new { @class = "nav-link" })</li>
 
                         <li class="nav-item">
-                        <li>@Html.ActionLink("參展商", "Index", "exhibitors", new { }, new { @class = "nav-link" })</li>
-                        <li class="nav-item">
-                        <li>@Html.ActionLink("主辦方", "Index", "hosts", new { }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("購票紀錄", "Index", "Hosts", new { }, new { @class = "nav-link" })</li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                活動專區
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li>@Html.ActionLink("產生QRCode", "userLogin", "Home", new { }, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("活動簽到", "ExhibitorLogin", "Home", new { }, new { @class = "dropdown-item" })</li>
+
+                            </ul>
+                        </li>
                     </ul>
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                註冊
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li>@Html.ActionLink("用戶註冊", "userRegister", "Home", new { }, new { @class = "dropdown-item" })</li>
-                                <li>@Html.ActionLink("參展商註冊", "ExhibitorRegister", "Home", new { }, new { @class = "dropdown-item" })</li>
-                                <li>@Html.ActionLink("主辦方註冊", "hostRegister", "Home", new { }, new { @class = "dropdown-item" })</li>
-
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                登入
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li>@Html.ActionLink("用戶登入", "userLogin", "Home", new { }, new { @class = "dropdown-item" })</li>
-                                <li>@Html.ActionLink("廠商登入", "ExhibitorLogin", "Home", new { }, new { @class = "dropdown-item" })</li>
-                                <li>@Html.ActionLink("主辦登入", "hostLogin", "Home", new { }, new { @class = "dropdown-item" })</li>
-
-                            </ul>
-                        </li>
+                        <li class="nav-item">
+                        <li>@Html.ActionLink("登出", "Logout", "Home", new { }, new { @class = "nav-link" })</li>
                     </ul>
                 </div>
             </div>
@@ -70,7 +59,7 @@
             <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 應用程式</p>
         </footer>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     @RenderSection("scripts", required: false)
 </body>

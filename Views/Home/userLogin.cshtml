@@ -62,7 +62,7 @@
 @section scripts{
 
     <script>
-        async function checkLoginForm(form) {
+        async function checkLoginForm() {
             const userpassword = document.getElementById("userpassword");
             const password = document.getElementById("password");
 
@@ -70,7 +70,7 @@
                 return result;
             }).then(
                 result => {
-                    password.value = result;                    
+                    password.value = result;
                 }
             );
             document.getElementById("form1").submit();
