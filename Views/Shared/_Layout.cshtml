@@ -36,30 +36,45 @@
                         <li class="nav-item">
                         <li>@Html.ActionLink("主辦方", "Index", "hosts", new { }, new { @class = "nav-link" })</li>
                     </ul>
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                註冊
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li>@Html.ActionLink("用戶註冊", "userRegister", "Home", new { }, new { @class = "dropdown-item" })</li>
-                                <li>@Html.ActionLink("參展商註冊", "ExhibitorRegister", "Home", new { }, new { @class = "dropdown-item" })</li>
-                                <li>@Html.ActionLink("主辦方註冊", "hostRegister", "Home", new { }, new { @class = "dropdown-item" })</li>
+                    @{
+                        if (@HttpContext.Current.Session["UserRole"].ToString() == "Visitor")
+                        {
+                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        註冊
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <li>@Html.ActionLink("用戶註冊", "userRegister", "Home", new { }, new { @class = "dropdown-item" })</li>
+                                        <li>@Html.ActionLink("參展商註冊", "ExhibitorRegister", "Home", new { }, new { @class = "dropdown-item" })</li>
+                                        <li>@Html.ActionLink("主辦方註冊", "hostRegister", "Home", new { }, new { @class = "dropdown-item" })</li>
 
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                登入
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li>@Html.ActionLink("用戶登入", "userLogin", "Home", new { }, new { @class = "dropdown-item" })</li>
-                                <li>@Html.ActionLink("廠商登入", "ExhibitorLogin", "Home", new { }, new { @class = "dropdown-item" })</li>
-                                <li>@Html.ActionLink("主辦登入", "hostLogin", "Home", new { }, new { @class = "dropdown-item" })</li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        登入
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <li>@Html.ActionLink("用戶登入", "userLogin", "Home", new { }, new { @class = "dropdown-item" })</li>
+                                        <li>@Html.ActionLink("廠商登入", "ExhibitorLogin", "Home", new { }, new { @class = "dropdown-item" })</li>
+                                        <li>@Html.ActionLink("主辦登入", "hostLogin", "Home", new { }, new { @class = "dropdown-item" })</li>
 
+                                    </ul>
+                                </li>
                             </ul>
-                        </li>
-                    </ul>
+                        }
+                        else
+                        {
+                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                <li>@Html.ActionLink("登出", "Logout", "Home", new { }, new { @class = "nav-link" })</li>
+                            </ul>
+                        }
+                    }
+
+
+
                 </div>
             </div>
         </nav>
